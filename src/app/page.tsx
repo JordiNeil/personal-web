@@ -34,24 +34,49 @@ const techStack = [
   { name: "Django", category: "Tools" },
 ];
 
-const experiences = [
+const experiences: {
+  role: string;
+  company: string;
+  client?: string;
+  period: string;
+  location: string;
+  highlights: string[];
+}[] = [
   {
-    role: "Tech Lead",
+    role: "Senior Software Engineer",
     company: "EPAM Systems",
-    period: "2023 - Present",
-    description: "Leading AI and data engineering initiatives, architecting solutions with Databricks and cloud technologies.",
+    client: "Whitecap — AI, backend & data engineering (Databricks)",
+    period: "Jul 2024 – Present",
+    location: "Remote",
+    highlights: [
+      "Built a multi-agent chatbot so managers can explore and analyze data in natural language (Text-to-SQL), without knowing the database layout.",
+      "Shipped Python/FastAPI services that orchestrate the agent stack and surface results visually.",
+      "Owned CI/CD with Git and Azure DevOps: pipelines, service connections, onboarding docs (merge conflicts, Databricks Asset Bundles / IaC, and more).",
+      "Implemented AI guardrails for safer model behavior in production.",
+      "Designed and delivered a customer churn prediction system.",
+      "Owned medallion gold-layer tables and transformation pipelines processing terabytes per day.",
+      "Defined monitoring with dashboards and alerts; mentored engineers on coding and data best practices; contributed to architecture and collected user feedback to iterate.",
+    ],
   },
   {
-    role: "Data Engineer",
-    company: "Previous Company",
-    period: "2021 - 2023",
-    description: "Built scalable data pipelines and ML infrastructure using Python, Spark, and cloud services.",
+    role: "Lead Software Engineer",
+    company: "SOUTHWORKS",
+    period: "Oct 2022 – Jun 2024",
+    location: "Remote",
+    highlights: [
+      "7Eleven Auth: greenfield Django + PostgreSQL authentication platform for admins registering products and promotions across apps; OAuth2 SSO for dependent services; unit tests, InfoSec reviews, and integration ownership; Jenkins plus IaC with CloudFormation and AWS CDK.",
+      "7Eleven Backend: localized the Django stack for new markets with automatic language detection and refactored the core to support countries beyond the US and Canada.",
+      "Microsoft / Yobi.ai: Fabric reference architecture—PySpark notebooks for large-scale prep, SynapseML & SparkML AutoML templates with tunable hyperparameters, MLflow tracking, model-metric reporting, and Fabric pipelines for automated training.",
+      "Microsoft / Electronic Arts: migrated historical telemetry from the ELK stack into Azure Data Explorer.",
+      "Internal R&D: end-to-end Databricks MLOps—data prep, training, hyperparameter search, automated model comparison, deployment, and monitoring triggered from Azure DevOps; gated promotions with model tests and minimum-quality checks; canary releases via Databricks model endpoints.",
+    ],
   },
   {
-    role: "Software Engineer",
-    company: "Early Career",
-    period: "2019 - 2021",
-    description: "Full-stack development with focus on backend systems and automation.",
+    role: "Data Scientist",
+    company: "Masiv",
+    period: "Jul 2020 – Nov 2021",
+    location: "Remote",
+    highlights: ["Developed new ML-based prototype."],
   },
 ];
 
@@ -136,12 +161,12 @@ export default function Home() {
           </h1>
           
           <p className="text-xl md:text-2xl text-slate-400 mb-4">
-            Tech Lead • AI Engineer • M.Sc in Artificial Intelligence
+            Senior Software Engineer • AI & Data • M.Sc in Artificial Intelligence
           </p>
           
           <p className="text-slate-500 max-w-2xl mx-auto mb-8">
-            25 years old. Building intelligent systems and leading engineering teams. 
-            Passionate about AI, data engineering, and creating impactful software solutions.
+            25 years old. Building intelligent systems, production data platforms, and the services that connect them.
+            Passionate about AI, data engineering, and shipping software that teams actually rely on.
           </p>
           
           <div className="flex items-center justify-center gap-4 mb-12">
@@ -192,7 +217,8 @@ export default function Home() {
                 <p>
                   I&apos;m a <strong className="text-slate-200">Mechatronics Engineer</strong> with a 
                   Master&apos;s degree in <strong className="text-slate-200">Artificial Intelligence</strong>, 
-                  currently working as a Tech Lead at EPAM Systems.
+                  currently a <strong className="text-slate-200">Senior Software Engineer</strong> at EPAM Systems
+                  (Whitecap), focused on AI, backend, and Databricks data engineering.
                 </p>
                 <p>
                   My passion lies at the intersection of AI, data engineering, and software development. 
@@ -249,8 +275,19 @@ export default function Home() {
                       {exp.company}
                     </span>
                   </div>
-                  <p className="text-slate-500 text-sm mb-3">{exp.period}</p>
-                  <p className="text-slate-400">{exp.description}</p>
+                  {exp.client && (
+                    <p className="text-slate-400 text-sm mb-2">{exp.client}</p>
+                  )}
+                  <p className="text-slate-500 text-sm mb-3">
+                    {exp.period}
+                    <span className="text-slate-600"> · </span>
+                    {exp.location}
+                  </p>
+                  <ul className="list-disc list-outside space-y-2 pl-5 text-slate-400 text-sm md:text-base">
+                    {exp.highlights.map((item, j) => (
+                      <li key={j}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
